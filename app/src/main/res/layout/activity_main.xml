@@ -19,6 +19,15 @@
         android:src="@drawable/nolan"
         android:scaleType="fitEnd" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/key_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="@string/btn_settings"
+        android:textSize="@dimen/btn_settings_size"
+        style="@style/Settings_BTN"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
