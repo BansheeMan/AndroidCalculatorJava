@@ -1,12 +1,13 @@
 package com.example.androidcalculatorjava.ui;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.androidcalculatorjava.R;
 import com.example.androidcalculatorjava.domain.CalculatorImp;
@@ -15,12 +16,13 @@ import com.example.androidcalculatorjava.domain.Operation;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CalculatorActivity extends AppCompatActivity implements CalculatorView {
+public class CalculatorActivity extends ThemesActivity implements CalculatorView {
 
     private TextView argOneField;
     private TextView argTwoField;
     private TextView operatorField;
     private TextView txtResult;
+    private Button btnSettings;
     private CalculatorPresenter presenter;
     private final Map<Integer, Integer> digits = new HashMap<>();
     private final Map<Integer, Operation> operators = new HashMap<>();
@@ -31,6 +33,7 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -46,6 +49,19 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         findViewById(R.id.key_dot).setOnClickListener(view -> presenter.onDotPressed());
         findViewById(R.id.key_equal).setOnClickListener(view -> presenter.displayResult());
         findViewById(R.id.key_clear).setOnClickListener(view -> presenter.displayClear());
+
+        if (btnSettings != null) {
+            btnSettings.setOnClickListener(view -> {
+                Intent i = new Intent(CalculatorActivity.this, SettingsActivity.class);
+                startActivity(i);
+            });
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
     }
 
     @Override
@@ -123,5 +139,6 @@ public class CalculatorActivity extends AppCompatActivity implements CalculatorV
         findViewById(R.id.key_multiply).setOnClickListener(operatorsPress);
         findViewById(R.id.key_deduct).setOnClickListener(operatorsPress);
         findViewById(R.id.key_divide).setOnClickListener(operatorsPress);
+        btnSettings = findViewById(R.id.key_setting);
     }
 }
